@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelian AC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .left-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0073e6;
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .right-side {
+            flex: 2;
+            padding: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        nav button {
+            margin: 0 15px;
+            background-color: #ffffff;
+            color: #0073e6;
+            border: 2px solid #0073e6;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav button:hover {
+            background-color: #005bb5;
+            color: white;
+        }
+
+        .ac-item {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #0073e6;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ac-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .ac-item img {
+            width: 100%;
+            max-width: 220px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .ac-item img:hover {
+            transform: scale(1.1);
+        }
+
+        #main-menu {
+            display: none;
+        }
+
+        #login-page {
+            display: block;
+        }
+
+        input, select, button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 90%;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        footer a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        .payment-container input, .payment-container select {
+            width: 100%;
+        }
+
+        .order-summary p {
+            padding: 8px;
+            font-size: 16px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav button {
+                margin: 10px 0;
+            }
+
+            .ac-item img {
+                max-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="login-page" class="container">
+        <div class="left-side">
+            <h2>Selamat Datang!</h2>
+        </div>
+        <div class="right-side">
+            <div class="login-container">
+                <h2>Login</h2>
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button onclick="login()">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Menu (Visible after login) -->
+    <div id="main-menu" class="container">
+        <div class="left-side">
+            <h2>Pembelian AC</h2>
+        </div>
+        <div class="right-side">
+            <nav>
+                <button onclick="showSection('katalog')">Katalog AC</button>
+                <button onclick="showSection('konfirmasi')">Konfirmasi Pemesanan</button>
+                <button onclick="showSection('pembayaran')">Metode Pembayaran</button>
+            </nav>
+
+            <section id="katalog" style="display: none;">
+                <h2>Katalog AC</h2>
+                <div class="ac-container">
+                    <div class="ac-item">
+                        <img src="https://www.lg.com/content/dam/channel/wcms/id/images/ac-lg-new-hercules/h12tn4_ncax_ekhq_id_c/gallery/DZ-07.jpg" alt="AC LG">
+                        <h3>AC LG</h3>
+                        <label for="harga-lg">Pilih Harga:</label>
+                        <select id="harga-lg">
+                            <option value="3000000">Rp 3.000.000</option>
+                            <option value="4000000">Rp 4.000.000</option>
+                            <option value="5000000">Rp 5.000.000</option>
+                        </select>
+                        <button onclick="addToConfirmation('AC LG', document.getElementById('harga-lg').value)">Pesan Sekarang</button>
+                    </div>
+
+                    <div class="ac-item">
+                        <img src="https://www.abangbenerin.com/blog/wp-content/uploads/2021/07/membeli-ac-baru.jpg" alt="AC Samsung">
+                        <h3>AC Samsung</h3>
+                        <label for="harga-samsung">Pilih Harga:</label>
+                        <select id="harga-samsung">
+                            <option value="3500000">Rp 3.500.000</option>
+                            <option value="4500000">Rp 4.500.000</option>
+                            <option value="5500000">Rp 5.500.000</option>
+                        </select>
+                        <button onclick="addToConfirmation('AC Samsung', document.getElementById('harga-samsung').value)">Pesan Sekarang</button>
+                    </div>
+
+                    <div class="ac-item">
+                        <img src="https://hisense.id/wp-content/uploads/2021/02/AN18CDG-01.jpg" alt="AC Hisense">
+                        <h3>AC Hisense</h3>
+                        <label for="harga-hisense">Pilih Harga:</label>
+                        <select id="harga-hisense">
+                            <option value="3200000">Rp 3.200.000</option>
+                            <option value="4200000">Rp 4.200.000</option>
+                            <option value="5200000">Rp 5.200.000</option>
+                        </select>
+                        <button onclick="addToConfirmation('AC Hisense', document.getElementById('harga-hisense').value)">Pesan Sekarang</button>
+                    </div>
+
+                    <div class="ac-item">
+                        <img src="https://www.bhinneka.com/blog/wp-content/uploads/2021/07/AC-1-PK-Samsung-AR10RYFHAWKNSE.jpg" alt="AC Daikin">
+                        <h3>AC Daikin</h3>
+                        <label for="harga-daikin">Pilih Harga:</label>
+                        <select id="harga-daikin">
+                            <option value="3300000">Rp 3.300.000</option>
+                            <option value="4300000">Rp 4.300.000</option>
+                            <option value="5300000">Rp 5.300.000</option>
+                        </select>
+                        <button onclick="addToConfirmation('AC Daikin', document.getElementById('harga-daikin').value)">Pesan Sekarang</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="konfirmasi" style="display: none;">
+                <h2>Konfirmasi Pembelian</h2>
+                <div id="order-summary">Rincian Pesanan Anda</div>
+                <button onclick="proceedToPayment()">Lanjut ke Pembayaran</button>
+            </section>
+
+            <section id="pembayaran" style="display: none;">
+                <h2>Pembayaran</h2>
+                <div class="payment-container">
+                    <label for="payment-method">Pilih Metode Pembayaran:</label>
+                    <select id="payment-method" required>
+                        <option value="">Pilih Metode Pembayaran</option>
+                        <option value="transfer-bank">Transfer Bank</option>
+                        <option value="ovo">Ovo</option>
+                        <option value="dana">Dana</option>
+                    </select>
+                    <input type="text" id="account-name" placeholder="Nama Pemilik Rekening" required>
+                    <button onclick="showReceipt()">Bayar Sekarang</button>
+                </div>
+            </section>
+
+            <footer>
+                <p>Hubungi Kami: <a href="https://wa.me/6285265699594">WhatsApp</a></p>
+                <p>Instagram: <a href="https://www.instagram.com/zihantikaa_/" target="_blank">@zihantikaa_</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username === "admin" && password === "admin") {
+                document.getElementById("login-page").style.display = "none";
+                document.getElementById("main-menu").style.display = "flex";
+            } else {
+                alert("Username atau Password salah");
+            }
+        }
+
+        function showSection(section) {
+            document.querySelectorAll("section").forEach(function (el) {
+                el.style.display = "none";
+            });
+            document.getElementById(section).style.display = "block";
+        }
+
+        function addToConfirmation(acName, price) {
+            var orderSummary = document.getElementById("order-summary");
+            orderSummary.innerHTML += `<p>${acName} - Rp ${price}</p>`;
+        }
+
+        function proceedToPayment() {
+            showSection('pembayaran');
+        }
+
+        function showReceipt() {
+            alert("Pembayaran berhasil! Terima kasih telah membeli AC.");
+        }
+    </script>
+</body>
+</html>
